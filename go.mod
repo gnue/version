@@ -5,7 +5,7 @@ go 1.19
 //replace github.com/gnue/version/pb => ./pb
 
 require (
-	github.com/gnue/version/pb v0.0.0-20221208133219-da141b3b9bbb
+	github.com/gnue/version/pb v0.0.0-20221208144522-7e1025ba2910
 	github.com/jessevdk/go-flags v1.5.0
 	golang.org/x/net v0.4.0
 	google.golang.org/grpc v1.51.0

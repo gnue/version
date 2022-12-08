@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"net"
 	"path/filepath"
@@ -21,8 +22,14 @@ func GetVersion() (*pb.VersionReply, error) {
 		return nil, errors.New("no BuildInfo")
 	}
 	ver := info.Main.Version
-	rev := geSetting(info.Settings, "vcs.revision")
-	return &pb.VersionReply{Version: ver, Revision: rev, GoVersion: info.GoVersion}, nil
+	vcs := getSetting(info.Settings, "vcs")
+	rev := getSetting(info.Settings, "vcs.revision")
+	modified := getSetting(info.Settings, "modified")
+	if modified == "true" {
+		rev += "*"
+	}
+	fmt.Println(vcs)
+	return &pb.VersionReply{Version: ver, Revision: vcs + rev, GoVersion: info.GoVersion}, nil
 }
 
 type versionCommand struct {

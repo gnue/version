@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"net"
 	"os"
 	"os/signal"
@@ -50,7 +49,7 @@ func (c *serverCommand) Execute(args []string) error {
 
 type server struct{}
 
-func geSetting(settings []debug.BuildSetting, key string) string {
+func getSetting(settings []debug.BuildSetting, key string) string {
 	for _, s := range settings {
 		if s.Key == key {
 			return s.Value
@@ -62,12 +61,5 @@ func geSetting(settings []debug.BuildSetting, key string) string {
 
 // リクセスト(Name)を受け取り、レスポンス(Message)を返す
 func (s *server) Version(ctx context.Context, in *pb.VersionRequest) (*pb.VersionReply, error) {
-	info, ok := debug.ReadBuildInfo()
-	if !ok {
-		// Goモジュールが無効など
-		return nil, errors.New("no BuildInfo")
-	}
-	ver := info.Main.Version
-	rev := geSetting(info.Settings, "vcs.revision")
-	return &pb.VersionReply{Version: ver, Revision: rev, GoVersion: info.GoVersion}, nil
+	return GetVersion()
 }
