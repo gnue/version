@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "./pb";
+
+service Greeter {
+    rpc Version (VersionRequest) returns (VersionReply){}
+}
+
+message VersionRequest{
+}
+
+message VersionReply {
+    string version = 1;
+    string revision = 2;
+    string goVersion = 3;
+}
