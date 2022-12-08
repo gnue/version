@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"log"
 	"net"
 	"os"
 	"os/signal"
@@ -68,7 +67,6 @@ func (s *server) Version(ctx context.Context, in *pb.VersionRequest) (*pb.Versio
 		// Goモジュールが無効など
 		return nil, errors.New("no BuildInfo")
 	}
-	log.Printf("New Request: %v", in.String())
 	ver := info.Main.Version
 	rev := geSetting(info.Settings, "vcs.revision")
 	return &pb.VersionReply{Version: ver, Revision: rev, GoVersion: info.GoVersion}, nil

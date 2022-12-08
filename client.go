@@ -51,10 +51,9 @@ func (c *versionCommand) Execute(args []string) error {
 
 	//サーバーに対してリクエストを送信する
 	resp, err := client.Version(context.Background(), &pb.VersionRequest{})
-	if err != nil {
-		log.Fatalf("RPC error: %v", err)
+	if err == nil {
+		resp.Print("Server:")
 	}
-	resp.Print("Server:")
 
 	resp, err = GetVersion()
 	resp.Print("Client:")
