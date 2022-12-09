@@ -13,7 +13,7 @@ func (resp *VersionReply) Print(name string) {
 	fmt.Printf("\tGo version:\t%s\n", resp.GoVersion)
 }
 
-func getSetting(settings [].debug.BuildSetting, key string) string {
+func getSetting(settings []debug.BuildSetting, key string) string {
 	for _, s := range settings {
 		if s.Key == key {
 			return s.Value
