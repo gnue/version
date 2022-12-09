@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.21.9
-// source: pb/version.proto
+// source: version.proto
 
-package pb
+package version
 
 import (
 	context "context"
@@ -35,7 +35,7 @@ func NewGreeterClient(cc grpc.ClientConnInterface) GreeterClient {
 
 func (c *greeterClient) Version(ctx context.Context, in *VersionRequest, opts ...grpc.CallOption) (*VersionReply, error) {
 	out := new(VersionReply)
-	err := c.cc.Invoke(ctx, "/pb.Greeter/Version", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/version.Greeter/Version", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ func _Greeter_Version_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.Greeter/Version",
+		FullMethod: "/version.Greeter/Version",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GreeterServer).Version(ctx, req.(*VersionRequest))
@@ -90,7 +90,7 @@ func _Greeter_Version_Handler(srv interface{}, ctx context.Context, dec func(int
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Greeter_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pb.Greeter",
+	ServiceName: "version.Greeter",
 	HandlerType: (*GreeterServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -99,5 +99,5 @@ var Greeter_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "pb/version.proto",
+	Metadata: "version.proto",
 }
