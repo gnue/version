@@ -19,7 +19,7 @@ func (resp *VersionReply) Print(name string) {
 	}
 	fmt.Printf("%s:\n", name)
 
-	fmt.Printf("\tversion:\t%s\n", resp.Version)
-	fmt.Printf("\t%s commit:\t%s\n", strcase.ToCamel(resp.Vcs), rev)
-	fmt.Printf("\tGo version:\t%s\n", resp.GoVersion)
+	fmt.Printf("  version:\t%s\n", resp.Version)
+	fmt.Printf("  %s commit:\t%s\n", strcase.ToCamel(resp.Vcs), rev)
+	fmt.Printf("  Go version:\t%s\n", resp.GoVersion)
 }
