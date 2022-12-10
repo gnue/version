@@ -15,6 +15,6 @@ message VersionReply {
     string version = 1;
     string vcs = 2;
     string revision = 3;
-    string modified = 4;
+    bool modified = 4;
     string goVersion = 5;
 }

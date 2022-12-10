@@ -1,12 +1,10 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"log"
 	"net"
 	"path/filepath"
-	"runtime/debug"
 	"time"
 
 	pb "github.com/gnue/version"
@@ -47,21 +45,8 @@ func (c *versionCommand) Execute(args []string) error {
 
 	fmt.Println()
 
-	resp, err = GetVersion()
+	resp, err = pb.GetVersion()
 	resp.Print("Client")
 
 	return err
-}
-
-func GetVersion() (*pb.VersionReply, error) {
-	info, ok := debug.ReadBuildInfo()
-	if !ok {
-		// Goモジュールが無効など
-		return nil, errors.New("no BuildInfo")
-	}
-	ver := info.Main.Version
-	vcs := pb.GetSetting(info.Settings, "vcs")
-	rev := pb.GetSetting(info.Settings, "vcs.revision")
-	modified := pb.GetSetting(info.Settings, "modified")
-	return &pb.VersionReply{Version: ver, Vcs: vcs, Revision: rev, Modified: modified, GoVersion: info.GoVersion}, nil
 }
