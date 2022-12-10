@@ -16,12 +16,16 @@ import (
 type Server struct {
 }
 
-func Run(addr string) error {
-	//requestを受け付けるportを指定する
+func NetworkFromAddr(addr string) string {
 	network := "unix"
 	if filepath.Ext(addr) != ".sock" {
 		network = "tcp"
 	}
+	return network
+}
+
+func Run(addr string) error {
+	network := NetworkFromAddr(addr)
 
 	lis, err := net.Listen(network, addr)
 	if err != nil {
